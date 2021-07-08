@@ -49,8 +49,8 @@ consume
         #Initialize a dict
         inventory_data = {}
         #Read the CSV and add it to the dictionary
-        with open(inventory_file, 'r') as fh:
-            csvdict = csv.DictReader(fh)
+        with open(inventory_file, 'r') as fh: 
+            csvdict = csv.DictReader(fh, delimiter=';')
             for rows in csvdict:
                 hostname = rows['SERVIDOR']
                 inventory_data[hostname] = rows
@@ -61,25 +61,25 @@ consume
         self.inventory_file = self.inv_dir + '/' + self.inv_file
         self.myinventory = self._get_structured_inventory(self.inventory_file)
         #Create the location, function and platform  groups
-        locations = []
+#        locations = []
         functions = []
         platforms = []
         for data in self.myinventory.values():
-            if not data['DATACENTER'] in locations:
-                locations.append(data['DATACENTER'])
+#            if not data['DATACENTER'] in locations:
+#                locations.append(data['DATACENTER'])
             if not data['RESERVADO_ANSIBLE'] in functions:
                 functions.append(data['RESERVADO_ANSIBLE'])
             if not data['SISTEMA_OPERACIONAL_CMDB'] in platforms:
                 platforms.append(data['SISTEMA_OPERACIONAL_CMDB'])
-        for location in locations:
-            self.inventory.add_group(location)
+#        for location in locations:
+#            self.inventory.add_group(location)
         for function in functions:
             self.inventory.add_group(function)
         for platform in platforms:
             self.inventory.add_group(platform)
         #Add the hosts to the groups
         for hostname,data in self.myinventory.items():
-            self.inventory.add_host(host=hostname, group=data['DATACENTER'])
+#            self.inventory.add_host(host=hostname, group=data['DATACENTER'])
             self.inventory.add_host(host=hostname, group=data['RESERVADO_ANSIBLE'])
             self.inventory.add_host(host=hostname, group=data['SISTEMA_OPERACIONAL_CMDB'])
             self.inventory.set_variable(hostname, 'ansible_host', data['IP'])

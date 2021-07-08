@@ -1,4 +1,5 @@
 ---
 plugin: my_csv_plugin            # Name of the plugin
 path_to_inventory: csv_inventory # Directory location of CSV
-csv_file: myinventory.csv        # Name of the inventory file 
+#csv_file: myinventory.csv        # Name of the inventory file 
+csv_file: fredInventory.csv        # Name of the inventory file 
